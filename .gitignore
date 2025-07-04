@@ -1,0 +1,12 @@
+# Ignore Node.js backend dependencies
+/backend/node_modules
+/backend/.env
+
+# Ignore React frontend build files and dependencies
+/frontend/node_modules
+/frontend/dist
+/frontend/.env
+
+# General ignores
+.DS_Store
+.env

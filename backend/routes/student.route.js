@@ -1,0 +1,17 @@
+import express from 'express';
+import { applyLeave,get_payment, getHallInformation, getLeaveRefund, getMealHistory,  getPaymentHistory,makeMealPayment, paymentSuccess, payRegistrationFee, reg_verification, registrationSuccess, studentRegistration,verifyOtp } from '../controllers/student.controller.js';
+const router=express.Router();
+router.post('/reg_verification',reg_verification);
+router.post('/otp_verification',verifyOtp);
+router.post('/registration',studentRegistration);
+router.get('/get_payment/:studentId',get_payment);
+router.get('/make_payment',makeMealPayment);
+router.get('/registration_payment',payRegistrationFee);
+router.post('/payment_success',paymentSuccess);
+router.post('/registration_success',registrationSuccess);
+router.get('/payment_history/:studentId',getPaymentHistory);
+router.get('/meal_history/:studentId',getMealHistory);
+router.post('/apply_leave/:studentId',applyLeave);
+router.get('/hall_data/:hallId',getHallInformation);
+router.get('/get_leave_refund/:studentId',getLeaveRefund);
+export default router;

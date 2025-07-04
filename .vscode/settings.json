@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/f36b4a78-1b57-4c6f-a6ff-b4d55f528e64/resourceGroups/shmms/providers/Microsoft.Web/sites/shmms-backend",
+    "appService.deploySubpath": "backend"
+}
