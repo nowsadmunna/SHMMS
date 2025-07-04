@@ -63,7 +63,7 @@ export default function Login() {
     try {
       setLoading(true);
       setErrorMessage('');
-      console.log('API_URL:', import.meta.env.VITE_API_URL);
+      console.log('API_URL env:', import.meta.env.VITE_API_URL);
       const res = await fetch(`${API_URL}/api/auth/login`, {
         method: 'POST',
         headers: {
