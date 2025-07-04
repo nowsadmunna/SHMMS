@@ -16,7 +16,7 @@ export default function Profile() {
     phone: currentUser?.phone || '',
     hons_year: currentUser?.hons_year || '',
   });
-  const [photoPreview, setPhotoPreview] = useState(`${API_URL}/${currentUser.photo}`);
+  const [photoPreview, setPhotoPreview] = useState(`${currentUser.photo}`);
   const [photoFile, setPhotoFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
@@ -129,7 +129,7 @@ export default function Profile() {
       });
       
       if (photoFile) {
-        formDataToSend.append('photo', photoFile);
+        formDataToSend.append('file', photoFile);
       }
 
       const response = await fetch(`${API_URL}/api/auth/update_profile/${currentUser._id}`, {
