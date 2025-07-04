@@ -162,7 +162,7 @@ export default function TeacherProfile() {
       });
       
       if (photoFile) {
-        formDataToSend.append('photo', photoFile);
+        formDataToSend.append('file', photoFile);
       }
 
       const response = await fetch(`${API_URL}/api/auth/update_profile/${currentUser._id}`, {
@@ -180,7 +180,7 @@ export default function TeacherProfile() {
       setTimeout(() => {
         setIsEditing(false);
         setSaveSuccess(false);
-        setPhotoPreview(`${API_URL}/${data.photo}`);
+        setPhotoPreview(`${data.photo}`);
       }, 1500);
     } catch (err) {
       console.error('Error updating profile:', err);

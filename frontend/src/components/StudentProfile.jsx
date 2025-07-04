@@ -147,7 +147,7 @@ export default function Profile() {
       setTimeout(() => {
         setIsEditing(false);
         setSaveSuccess(false);
-        setPhotoPreview(`${API_URL}/${data.photo}`);
+        setPhotoPreview(`${data.photo}`);
       }, 1500);
     } catch (err) {
       console.error('Error updating profile:', err);

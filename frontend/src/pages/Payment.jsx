@@ -37,7 +37,7 @@ export default function Payment() {
       const res = await fetch(`${API_URL}/api/student/make_payment?paymentId=${payment_id}&studentId=${currentUser._id}`);
       const data = await res.json();
       if (res.ok) {
-        window.open(data.url, '_blank');
+        window.open(data.url);
       } else {
         setError(data.message || "Failed to initiate payment");
       }

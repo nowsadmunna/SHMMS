@@ -102,7 +102,7 @@ export default function ManagerProfile() {
       });
       
       if (photoFile) {
-        formDataToSend.append('photo', photoFile);
+        formDataToSend.append('file', photoFile);
       }
 
       const response = await fetch(`${API_URL}/api/auth/update_profile/${currentUser._id}`, {
@@ -120,7 +120,7 @@ export default function ManagerProfile() {
       setTimeout(() => {
         setIsEditing(false);
         setSaveSuccess(false);
-        setPhotoPreview(`http://localhost:3000/${data.photo}`);
+        setPhotoPreview(`${data.photo}`);
       }, 1500);
     } catch (err) {
       console.error('Error updating profile:', err);
