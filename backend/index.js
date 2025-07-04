@@ -49,7 +49,7 @@ app.post('/api/hallstudent',(req,res)=>{
   res.status(201).json('hall student added');
 });
 app.get('/',(req,res)=>{
-  res.send('Welcome to SHMMS API');
+  res.send('Welcome to SHMMS API and ci/cd deployment');
 });
 app.use('/api/student',studentRouter);
 app.use('/api/auth',authRouter);
