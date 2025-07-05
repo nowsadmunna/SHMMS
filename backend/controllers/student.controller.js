@@ -246,7 +246,7 @@ export const paymentSuccess=async(req,res,next)=>{
   const manager=await Manager.findOne();
   manager.balance+=paymentDetails.amount;
   await manager.save();
-  res.redirect(`http://localhost:5173/update_mealstatus`);
+  res.redirect(`${process.env.FRONTEND_URL}/update_mealstatus`);
   }catch(error){
     return next(error);
   }
@@ -389,7 +389,7 @@ export const registrationSuccess=async(req,res,next)=>{
   await newPayment.save();
   await student.save();
   await manager.save();
-  res.redirect(`http://localhost:5173/login`);
+  res.redirect(`${process.env.FRONTEND_URL}/login`);
   }catch(error){
     return next(error);
   }

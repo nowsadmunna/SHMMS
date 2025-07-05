@@ -1,4 +1,4 @@
-name: Deploy Backend to Azure
+name: Deploy Dockerized Backend to Azure
 
 on:
   push:
@@ -9,30 +9,29 @@ on:
 
 jobs:
   build-and-deploy:
-    name: Build and Deploy Node.js Backend
     runs-on: ubuntu-latest
+    name: Build & Deploy Docker Image to Azure App Service
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
+    # Login to DockerHub or ACR
+    - name: Log in to Docker registry
+      run: echo "${{ secrets.REGISTRY_PASSWORD }}" | docker login ${{ secrets.REGISTRY_URL }} -u ${{ secrets.REGISTRY_USERNAME }} --password-stdin
 
-    - name: Install backend dependencies
-      working-directory: backend
-      run: npm install
+    # Build Docker image
+    - name: Build Docker image
+      run: docker build -t ${{ secrets.REGISTRY_URL }}/${{ secrets.IMAGE_NAME }}:latest ./backend
 
-    - name: Zip backend for deployment
-      run: |
-        cd backend
-        zip -r ../backend.zip .
+    # Push Docker image to registry
+    - name: Push Docker image
+      run: docker push ${{ secrets.REGISTRY_URL }}/${{ secrets.IMAGE_NAME }}:latest
 
+    # Deploy to Azure Web App
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
       with:
         app-name: shmms-backend
         publish-profile: ${{ secrets.AZURE_BACKEND_PUBLISH_PROFILE }}
-        package: backend.zip
+        images: ${{ secrets.REGISTRY_URL }}/${{ secrets.IMAGE_NAME }}:latest

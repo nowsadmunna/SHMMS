@@ -1,0 +1,30 @@
+# Node dependencies (will be reinstalled in image)
+node_modules
+npm-debug.log
+
+# Logs
+*.log
+
+# Environment files (secrets, local-only)
+.env
+.env.local
+.env.development
+.env.production
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Git
+../git
+../gitignore
+
+# Docker-related
+Dockerfile
+.dockerignore
+docker-compose.yml
+
+# Tests & coverage (optional)
+coverage
+__tests__/
+*.test.js
