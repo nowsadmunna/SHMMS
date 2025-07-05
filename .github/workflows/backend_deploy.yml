@@ -1,4 +1,4 @@
-name: Deploy Dockerized Backend to Azure
+name: Deploy Dockerized Backend and Dockerhub to Azure
 
 on:
   push:
@@ -10,34 +10,28 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    name: Build & Deploy to Azure App Service using Docker Hub
+    name: Build & Deploy Docker Image to Azure App Service
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    # Safe Debugging
-    - name: Confirm secret usage
-      run: |
-        echo "Using Docker Hub image: ${{ secrets.IMAGE_NAME }}"
-        echo "Secrets for Docker Hub login are assumed to be correct."
-
-    # Log in to Docker Hub
-    - name: Log in to Docker Hub
-      run: echo "${{ secrets.REGISTRY_PASSWORD }}" | docker login -u ${{ secrets.REGISTRY_USERNAME }} --password-stdin
+    # Login to DockerHub or ACR
+    - name: Log in to Docker registry
+      run: echo "${{ secrets.REGISTRY_PASSWORD }}" | docker login ${{ secrets.REGISTRY_URL }} -u ${{ secrets.REGISTRY_USERNAME }} --password-stdin
 
     # Build Docker image
     - name: Build Docker image
-      run: docker build -t ${{ secrets.IMAGE_NAME }}:latest ./backend
+      run: docker build -t ${{ secrets.REGISTRY_URL }}/${{ secrets.IMAGE_NAME }}:latest ./backend
 
-    # Push Docker image
+    # Push Docker image to registry
     - name: Push Docker image
-      run: docker push ${{ secrets.IMAGE_NAME }}:latest
+      run: docker push ${{ secrets.REGISTRY_URL }}/${{ secrets.IMAGE_NAME }}:latest
 
-    # Deploy to Azure
+    # Deploy to Azure Web App
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
       with:
         app-name: shmms-backend
         publish-profile: ${{ secrets.AZURE_BACKEND_PUBLISH_PROFILE }}
-        images: ${{ secrets.IMAGE_NAME }}:latest
+        images: ${{ secrets.REGISTRY_URL }}/${{ secrets.IMAGE_NAME }}:latest
