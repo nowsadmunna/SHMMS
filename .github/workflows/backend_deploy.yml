@@ -1,4 +1,4 @@
-name: Deploy Dockerized Backend to Azure
+name: Deploy Dockerized Backend and DockerHub to Azure
 
 on:
   push:
