@@ -16,6 +16,14 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
+    - name: debugging
+      run: |
+        echo "Registry URL: ${{ secrets.REGISTRY_URL }}"
+        echo "Image Name: ${{ secrets.IMAGE_NAME }}"
+        echo "Azure Backend Publish Profile: ${{ secrets.AZURE_BACKEND_PUBLISH_PROFILE }}"
+        echo "Registry Username: ${{ secrets.REGISTRY_USERNAME }}"
+        echo "Registry Password: ${{ secrets.REGISTRY_PASSWORD }}"
+       
     # Login to DockerHub or ACR
     - name: Log in to Docker registry
       run: echo "${{ secrets.REGISTRY_PASSWORD }}" | docker login ${{ secrets.REGISTRY_URL }} -u ${{ secrets.REGISTRY_USERNAME }} --password-stdin
