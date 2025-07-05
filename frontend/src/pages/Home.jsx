@@ -77,7 +77,7 @@ export default function Home() {
             </span>
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Manage your hostel experience with our comprehensive dashboard
+            Manage your hostel experience with our shmms comprehensive dashboard
           </p>
         </div>
         
